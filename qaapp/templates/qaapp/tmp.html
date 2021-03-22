@@ -1,0 +1,27 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    {% comment %} "messages" will be loaded within the page.html {% endcomment %}
+
+    {% comment %} <h4>{% trans 'qaapp/tmp.html' %}</h4> {% endcomment %}
+    <h4>{% trans 'ask a new question' %}</h4>
+
+    <form method="post">
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% comment %} <button class="btn btn-primary">{% trans 'Save' %}</button> {% endcomment %}
+        <input type="submit" name="save" value="Save" />
+        {% comment %} <input type="submit" name="delete" value="Delete" /> {% endcomment %}
+        {% comment %} {{ question.first.id }} {% endcomment %}
+        {% comment %} {{ question.0.id }} {% endcomment %}
+        {% comment %} <li><a href="{% url 'question' question.0.id %}">show</a></li> {% endcomment %}
+
+    </form>
+
+{% endblock %}

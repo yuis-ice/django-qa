@@ -1,0 +1,57 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+    <h2>all questions</h2>
+
+    {% comment %} {% url 'question' question.first.id %} {% endcomment %}
+    {% comment %} {{ question.0.id }} {% endcomment %}
+    {% comment %} {{ question.0.id }}
+    {{ questions.0.id }}
+    {{ questions.1.id }}
+    {{ questions.2.id }} {% endcomment %}
+    {% comment %} {{ questions.0.user_id }} {% endcomment %}
+
+    <table>
+    <tr>
+        <th>content</th>
+        <th>user_id</th>
+        <th>created_at</th>
+    </tr>
+        {% for question in questions %}
+            <tr>
+                {% comment %} <td>{{ question.content }}</td>
+                <td>{{ question.user_id }}</td>
+                <td>{{ question.created_at }}</td> {% endcomment %}
+                <td><a href="{% url 'question' question.id %}">{{ question.content }}</a></td>
+                <td><a href="{% url 'questions_by_user' question.user_id %}">{{ question.user_id }}</a></td>
+                <td>{{ question.created_at }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if request.user.is_authenticated %}
+
+        <h2>my questions</h2>
+        
+        <table>
+        <tr>
+            <th>content</th>
+            <th>user_id</th>
+            <th>created_at</th>
+        </tr>
+            {% for myquestion in myquestions %}
+                <tr>
+                    <td><a href="{% url 'question' myquestion.id %}">{{ myquestion.content }}</a></td>
+                    <td><a href="{% url 'questions_by_user' myquestion.user_id %}">{{ myquestion.user_id }}</a></td>
+                    <td>{{ myquestion.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+     {% endif %}
+     
+    {% comment %} <p>{{ hoges }}</p> {% endcomment %}
+{% endblock %}

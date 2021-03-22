@@ -1,0 +1,70 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+    <h2>question</h2>
+
+    {% comment %} <li>{{ question.content }}</li>
+    <li>{{ question.user_id }}</li>
+    <li>{{ question.created_at }}</li> {% endcomment %}
+
+    {% comment %} <li>{{ question.first.content }}</li>
+    <li>{{ question.first.user_id }}</li>
+    <li>{{ question.first.created_at }}</li> {% endcomment %}
+
+    <table>
+    <tr>
+        <th>content</th>
+        <th>user_id</th>
+        <th>created_at</th>
+    </tr>
+        <tr>
+            <td>{{ question.first.content }}</td>
+            <td>{{ question.first.user_id }}</td>
+            <td>{{ question.first.created_at }}</td>
+        </tr>
+    </table>
+
+    <h2>answers</h2>
+
+    {% comment %} {{ answers }} {% endcomment %}
+
+    <table>
+    <tr>
+        <th>content</th>
+        <th>user_id</th>
+        <th>created_at</th>
+        <th>edit</th>
+    </tr>
+        {% for answer in answers %}
+            <tr>
+                <td>{{ answer.content }}</td>
+                <td>{{ answer.user_id }}</td>
+                <td>{{ answer.created_at }}</td>
+                {% if request.user.id == answer.user_id %}
+                    <td><a href="{% url 'qaapp:answer_edit' answer.id %}">edit this answer</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% comment %} {% url 'question' question.0.id %}
+    {{ question.0.id }}
+    {{ question.first.id }} {% endcomment %}
+
+    {% comment %} <a href=""></a> {% endcomment %}
+    {% comment %} <li><a href="{% url 'qaapp:question_edit' '4' %}">question_edit</a></li> {% endcomment %}
+
+    {% if request.user.id == question.first.user_id %}
+        <li><a href="{% url 'qaapp:question_edit' question.first.id %}">edit this question</a></li>
+    {% endif %}
+    
+    <li><a href="{% url 'qaapp:answer_new' question.first.id %}">answer to this question</a></li>
+    
+    {% comment %} <p>{{ question }}</p>
+    <p>{{ question.first }}</p> {% endcomment %}
+    {% comment %} <p>{{ hoges }}</p> {% endcomment %}
+    {% comment %} <p>{{ myquestions }}</p> {% endcomment %}
+{% endblock %}

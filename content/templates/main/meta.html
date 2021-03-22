@@ -1,0 +1,84 @@
+<pre> 
+
+__meta__ 
+
+# README.md
+
+## username and password 
+
+akari@example.com 
+pw
+
+aoi@example.com
+pw 
+
+anzu@example.com
+pw 
+
+## build environment 
+
+git clone [repo] 
+cd [repo]
+virtualenv venv
+. .\venv\Scripts\activate
+pip install -r .\requirements.txt
+
+## settings 
+
+$env:EMAIL_HOST_PASSWORD = "your gmail password"; # powershell 
+
+__dev__
+
+# note::tmp 
+
+todable 
+    question title 
+    upvote 
+    question comment 
+    answer comment 
+    profile pic 
+
+## test, bulk generation
+
+user = User.objects.create_user('akari', 'akari@example.com', 'pw')
+user = User.objects.create_user('aoi', 'aoi@example.com', 'pw')
+user = User.objects.create_user('anzu', 'anzu@example.com', 'pw')
+
+user = User.objects.filter(id=1)
+user = User.objects.filter(id=2)
+user = User.objects.filter(id=3)
+user = User.objects.filter(username="akari")
+user = User.objects.filter(username="aoi")
+user = User.objects.filter(username="anzu")
+
+Question.objects.update_or_create(user_id=1, content="what is cat?")
+Question.objects.update_or_create(user_id=1, content="what is dog?")
+Question.objects.update_or_create(user_id=1, content="what is penguin?")
+Question.objects.update_or_create(user_id=2, content="what is math?")
+Question.objects.update_or_create(user_id=2, content="what is technology?")
+Question.objects.update_or_create(user_id=2, content="what is physics?")
+Question.objects.update_or_create(user_id=3, content="what is english?")
+Question.objects.update_or_create(user_id=3, content="what is chinese?")
+Question.objects.update_or_create(user_id=3, content="what is spanish?")
+
+akari = User.objects.filter(username="akari")
+akari_id = akari[0].id 
+aoi = User.objects.filter(username="aoi")
+aoi_id = aoi[0].id 
+anzu = User.objects.filter(username="anzu")
+anzu_id = anzu[0].id 
+q = Question.objects.filter(user_id=akari_id)[0]
+q_id = q.id
+Answer.objects.update_or_create(user_id=akari_id, question_id=q_id, content="it is great.")
+Answer.objects.update_or_create(user_id=aoi_id, question_id=q_id, content="it is awesome.")
+Answer.objects.update_or_create(user_id=anzu_id, question_id=q_id, content="it is tremendous.")
+
+## illegal 
+
+// illegal
+python manage.py dbshell
+SELECT * FROM sqlite_master WHERE type='table';
+SELECT * FROM qaapp_question;
+DROP TABLE qaapp_question;
+
+</pre> 

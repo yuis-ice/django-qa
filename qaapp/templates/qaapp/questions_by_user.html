@@ -1,0 +1,25 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    <h2>questions by {{ object_list.first.user_id }}</h2>
+    <table>
+    <tr>
+        <th>content</th>
+        <th>user_id</th>
+        <th>created_at</th>
+    </tr>
+        {% for question in object_list %}
+            <tr>
+                <td><a href="{% url 'question' question.id %}">{{ question.content }}</a></td>
+                <td><a href="{% url 'questions_by_user' question.user_id %}">{{ question.user_id }}</a></td>
+                <td>{{ question.created_at }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% comment %} <p>{{ object_list }}</p> {% endcomment %}
+{% endblock %}
